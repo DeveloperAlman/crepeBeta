@@ -1,12 +1,12 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// window.onload = function () {
-//     document.body.classList.add('preloader');
-//     window.setTimeout(function () {
-//         document.body.classList.add('loaded');
-//         document.body.classList.remove('preloader');
-//     }, 3500);
-// }
+ window.onload = function () {
+     document.body.classList.add('preloader');
+     window.setTimeout(function () {
+       document.body.classList.add('loaded');
+       document.body.classList.remove('preloader');
+    }, 3500);
+}
 
 let progress = document.getElementById("progressbar");
 let totalHeight = document.body.scrollHeight - window.innerHeight;
