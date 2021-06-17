@@ -1,12 +1,12 @@
 gsap.registerPlugin(ScrollTrigger);
 
-window.onload = function () {
-    document.body.classList.add('preloader');
-    window.setTimeout(function () {
-        document.body.classList.add('loaded');
-        document.body.classList.remove('preloader');
-    }, 3500);
-}
+// window.onload = function () {
+//     document.body.classList.add('preloader');
+//     window.setTimeout(function () {
+//         document.body.classList.add('loaded');
+//         document.body.classList.remove('preloader');
+//     }, 3500);
+// }
 
 let progress = document.getElementById("progressbar");
 let totalHeight = document.body.scrollHeight - window.innerHeight;
@@ -14,6 +14,34 @@ window.onscroll = function () {
     let progressHeight = (window.pageYOffset / totalHeight) * 55;
     progress.style.height = progressHeight + "%";
 }
+// Smooth scrolling anchor links
+function ea_scroll(hash) {
+    var target = $(hash);
+    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+    if (target.length) {
+        var top_offset = 50;
+        if ($('.site-header').css('position') == 'fixed') {
+            top_offset = $('.site-header').height();
+        }
+        if ($('body').hasClass('admin-bar')) {
+            top_offset = top_offset + $('#wpadminbar').height();
+        }
+        $('html,body').animate({
+            scrollTop: target.offset().top - top_offset
+        }, 800);
+        return false;
+    }
+}
+// -- Smooth scroll on pageload
+if (window.location.hash) {
+    ea_scroll(window.location.hash);
+}
+// -- Smooth scroll on click
+$('a[href*="#"]:not([href="#"]):not(.no-scroll)').click(function () {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+        ea_scroll(this.hash);
+    }
+});
 
 $(window).scroll(function () {
     var scroll = $(window).scrollTop();
@@ -22,7 +50,7 @@ $(window).scroll(function () {
     } else {
         $('.header__nav-wrapper').removeClass('fixed');
     }
-})
+});
 
 var animateButton = function (e) {
 
