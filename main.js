@@ -16,131 +16,6 @@ function ea_scroll(e) {
     }
 }
 
-const mouse = document.querySelector('.cursor');
-const mouseText = document.querySelector('.cursor-text');
-const burger = document.querySelector('.burger');
-const crepeLu = document.querySelector(".header__logo");
-const overflowHtml = document.querySelector(".html-overflow");
-
-function cursor(e) {
-    mouse.style.top = e.pageY + 'px';
-    mouse.style.left = e.pageX + 'px';
-}
-
-function activeCursor(e) {
-    const item = e.target;
-    if (item.id === 'logo' || item.classList.contains('burger')) {
-        mouse.classList.add('nav-active');
-    } else {
-        mouse.classList.remove('nav-active');
-    };
-    if (item.classList.contains('explore')) {
-        gsap.to('.title-swipe', 1, {
-            y: '0%',
-            ease: 'power2.inOut'
-        })
-        mouse.classList.add('explore-active');
-        mouseText.innerText = 'Tap';
-    } else {
-        mouse.classList.remove('explore-active');
-        mouseText.innerText = '';
-        gsap.to('.title-swipe', 1, {
-            y: '100%',
-            ease: 'power2.inOut'
-        })
-    };
-};
-
-function navToggle(e) {
-    if (!e.target.classList.contains('active')) {
-        e.target.classList.add('active');
-        gsap.to('.line1',
-            0.5, {
-                rotate: '45',
-                y: 7,
-                background: 'white',
-                // zIndex: 2
-            });
-        gsap.to('.line3',
-            0.5, {
-                rotate: '-45',
-                y: -17.2,
-                background: 'white',
-                // zIndex: 2
-            });
-        gsap.to('.line2',
-            0.5, {
-                opacity: 0
-            });
-        gsap.to('.nav-bar', 1.35, {
-            clipPath: 'circle(2000px at 100% -10%)',
-            ease: 'power2.inOut'
-        });
-        gsap.to('#logo', 1, {
-            color: '#17181a',
-            // zIndex: 2
-        })
-        gsap.to(".header__logo", 0.5, {
-            opacity: 0
-        })
-        gsap.to('.cursor', 1, {
-            borderColor: '#17181a',
-            zIndex: 100
-        });
-        gsap.to('.html-overflow', 0.2, {
-            overflow: "hidden"
-        });
-        gsap.to(".header__nav-wrapper.fixed", 0.5, {
-            background: "none",
-            boxShadow: "none"
-        });
-    } else {
-        e.target.classList.remove('active');
-        gsap.to('.line1',
-            0.5, {
-                rotate: '0',
-                y: 0,
-                background: 'white'
-            });
-        gsap.to('.line3',
-            0.5, {
-                rotate: '0',
-                y: 0,
-                background: 'white'
-            });
-        gsap.to('.line2',
-            0.5, {
-                rotate: '-0',
-                y: 0,
-                opacity: 1,
-                background: 'white'
-            });
-        gsap.to('.nav-bar', 1.35, {
-            clipPath: 'circle(50px at 100% -10%)',
-            ease: 'power2.inOut'
-        });
-        gsap.to('#logo', 1, {
-            color: 'white'
-        });
-        gsap.to('.cursor', 1, {
-            borderColor: 'white',
-            zIndex: 100
-        });
-        gsap.to(".header__logo", 1, {
-            opacity: 1
-        });
-        const overflowHtml = document.querySelector(".html-overflow").style = "overflow:auto";
-        gsap.to(".header__nav-wrapper.fixed", 0.5, {
-            background: "rgba(28, 28, 28, 0.99)",
-            boxShadow: "0 2rem 5rem rgba(0, 0, 0, 0.2)"
-        });
-    }
-}
-
-burger.addEventListener('click', navToggle);
-window.addEventListener('mousemove', cursor);
-window.addEventListener('mouseover', activeCursor);
-
 window.onscroll = function () {
     let e = window.pageYOffset / totalHeight * 33;
     progress.style.height = e + "%"
@@ -703,14 +578,13 @@ function detailAnimation() {
             x: "100%"
         }, "-=0.8"), a.fromTo(e, {
             opacity: 1,
-            scale: 1,
-            x: "0%"
+            scale: 1
         }, {
             opacity: 0,
-            scale: .5,
-            x: "20%"
+            scale: .5
         }, "+=0.8"), a.fromTo(r, {
-            x: "100%"
+            x: "100%",
+            scale: 1
         }, {
             x: "0%"
         }, "-=0.8"), detailScene = new ScrollMagic.Scene({
